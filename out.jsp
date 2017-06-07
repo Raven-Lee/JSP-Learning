@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="java.text.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'MyJsp.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -19,22 +19,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-    <h1>Jsp生命周期</h1> <br>
-    <hr>
-    <%
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-    	String s = sdf.format(new Date());
-     %>
-     今天是：<%=s %>
-    <Br>
-   	<a href="LoginDemo.jsp">登录界面</a>
-   	<a href="reg.jsp">注册界面</a><br>
-   	<a href="exercise.jsp">九九乘法表</a><br>
-   	<a href="response.jsp">response对象</a><br>
-   	<a href="session_page1.jsp">session对象</a><br>
-   	<a href="application.jsp">application对象</a><br>
+   <h1>内置对象</h1>
+   <%
+   		out.println("<h2>静夜思</h2>");
+   		out.println("床前明月光<br>");
+   		out.println("疑是地上霜<br>");
+   		out.println("举头望明月<br>");
+   		out.println("低头思故乡<br>");
+   		
+   		out.flush();
+   		//out.clear();//这里会抛出异常
+   		out.clearBuffer();
+    %>
+   	缓冲区大小：<%=out.getBufferSize() %>byte<br>
+   	缓冲区剩余大小：<%=out.getRemaining() %>byte<br>
+   	是否自动清空缓冲区：<%=out.isAutoFlush() %><br>
+   	<%
+   		
+   	%>
   </body>
 </html>

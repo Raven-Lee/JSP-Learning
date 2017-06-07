@@ -1,5 +1,5 @@
+<%@page import="com.sun.org.apache.xalan.internal.xsltc.runtime.Attributes"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="java.text.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'MyJsp.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -19,22 +20,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-    <h1>Jsp生命周期</h1> <br>
-    <hr>
-    <%
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-    	String s = sdf.format(new Date());
-     %>
-     今天是：<%=s %>
-    <Br>
-   	<a href="LoginDemo.jsp">登录界面</a>
-   	<a href="reg.jsp">注册界面</a><br>
-   	<a href="exercise.jsp">九九乘法表</a><br>
-   	<a href="response.jsp">response对象</a><br>
-   	<a href="session_page1.jsp">session对象</a><br>
-   	<a href="application.jsp">application对象</a><br>
+   <h1>Application内置对象</h1>
+   <%
+   	application.setAttribute("city", "北京");
+   	application.setAttribute("postcode", "10000");
+   	application.setAttribute("email", "liangwen.li@qq.com");
+   %>
+   	所在城市是:<%=application.getAttribute("city") %><br>
+  	application中的属性有:<br><%
+  		Enumeration attributes = application.getAttributeNames();
+  		while(attributes.hasMoreElements()){
+  			out.println(attributes.nextElement()+"<br>");
+  		}
+  	 %><Br>
+  	 JSP(SERVLET)引擎名及版本号：<%=application.getServerInfo() %><Br>
   </body>
 </html>
